@@ -30,16 +30,16 @@ const Navbar = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-white/90 backdrop-blur-md py-3 shadow-sm"
-          : "bg-transparent py-5"
+          : "bg-transparent py-4"
       }`}
     >
       <div className="chrono-container flex items-center justify-between">
-        {/* Logo */}
+        {/* Logo - Updated styling */}
         <Link
           to="/"
-          className="text-2xl font-display font-bold tracking-tighter text-chronoBlack"
+          className="text-3xl font-display font-bold tracking-tighter text-chronoBlack uppercase"
         >
-          Chrono
+          CHRONO
         </Link>
 
         {/* Desktop Navigation */}

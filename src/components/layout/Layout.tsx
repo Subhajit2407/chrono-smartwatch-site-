@@ -27,7 +27,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
-          className="flex-1 pt-20"
+          className="flex-1 pt-16" // Reduced from pt-20 to pt-16
         >
           {children}
         </motion.main>
