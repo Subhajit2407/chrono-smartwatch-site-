@@ -1,108 +1,59 @@
 
-import { Heart, Clock, Battery, Droplets, Zap, Smartphone } from "lucide-react";
+import { Heart, Battery, Droplets, Zap, Smartphone, Watch } from "lucide-react";
 import { motion } from "framer-motion";
+import { BentoGrid, type BentoItem } from "@/components/ui/bento-grid";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 
-const features = [
+const features: BentoItem[] = [
   {
-    icon: Heart,
+    icon: <Heart className="w-4 h-4 text-chronoRed" />,
     title: "Advanced Health Tracking",
-    description:
-      "Monitor heart rate, blood oxygen levels, and ECG with medical-grade precision.",
+    description: "Monitor heart rate, blood oxygen levels, and ECG with medical-grade precision.",
+    status: "Latest",
+    tags: ["Health", "Monitoring"],
+    colSpan: 2,
+    hasPersistentHover: true,
   },
   {
-    icon: Clock,
+    icon: <Battery className="w-4 h-4 text-emerald-500" />,
     title: "All-Day Battery",
-    description:
-      "Up to 18 hours of battery life with fast charging for all-day use.",
+    description: "Up to 18 hours of battery life with fast charging capabilities.",
+    status: "Updated",
+    tags: ["Battery", "Performance"],
   },
   {
-    icon: Droplets,
+    icon: <Droplets className="w-4 h-4 text-blue-500" />,
     title: "Water Resistant",
-    description:
-      "Swim-proof and shower-proof with water resistance up to 50 meters.",
+    description: "Swim-proof and shower-proof with water resistance up to 50 meters.",
+    tags: ["Protection", "Sports"],
+    colSpan: 2,
   },
   {
-    icon: Zap,
+    icon: <Watch className="w-4 h-4 text-purple-500" />,
     title: "Powerful Performance",
-    description:
-      "Faster processing with our latest chip for seamless experience.",
-  },
-  {
-    icon: Smartphone,
-    title: "Seamless Connectivity",
-    description:
-      "Stay connected to calls, texts, and apps even without your phone.",
-  },
-  {
-    icon: Battery,
-    title: "Power Reserve",
-    description:
-      "Low power mode extends battery life when you need it most.",
+    description: "Faster processing with our latest chip for seamless experience.",
+    status: "Pro",
+    tags: ["Performance", "Tech"],
   },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
 const FeaturesSection = () => {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-background">
       <div className="chrono-container">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="flex items-center justify-between mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-4xl font-display font-bold mb-6"
+            className="text-4xl font-display font-bold"
           >
-            Packed with Powerful Features
+            Packed with Features
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-xl text-chronoGray-dark"
-          >
-            Chrono smartwatches combine cutting-edge technology with elegant design
-            to deliver an exceptional experience that enhances your everyday life.
-          </motion.p>
+          <ThemeToggle />
         </div>
-
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              variants={item}
-              className="bg-chronoGray-light/10 p-8 rounded-2xl hover-scale"
-            >
-              <div className="bg-gradient-to-br from-chronoBlack to-chronoBlue/80 text-white p-3 rounded-xl inline-flex mb-5">
-                <feature.icon size={24} />
-              </div>
-              <h3 className="text-xl font-medium mb-3">{feature.title}</h3>
-              <p className="text-chronoGray-dark">{feature.description}</p>
-            </motion.div>
-          ))}
-        </motion.div>
+        <BentoGrid items={features} />
       </div>
     </section>
   );

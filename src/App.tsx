@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/context/CartContext";
 import { FavoritesProvider } from "@/context/FavoritesContext";
 import { AuthProvider } from "@/context/AuthContext";
+import { ThemeProvider } from "@/context/theme-provider";
 
 // Pages
 import HomePage from "./pages/HomePage";
@@ -24,31 +25,33 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <AuthProvider>
-        <CartProvider>
-          <FavoritesProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/shop" element={<ShopPage />} />
-                <Route path="/product/:productId" element={<ProductDetailPage />} />
-                <Route path="/cart" element={<CartPage />} />
-                <Route path="/checkout" element={<CheckoutPage />} />
-                <Route path="/compare" element={<ComparePage />} />
-                <Route path="/favorites" element={<FavoritesPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/order-success" element={<OrderSuccessPage />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </FavoritesProvider>
-        </CartProvider>
-      </AuthProvider>
-    </TooltipProvider>
+    <ThemeProvider defaultTheme="light">
+      <TooltipProvider>
+        <AuthProvider>
+          <CartProvider>
+            <FavoritesProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/shop" element={<ShopPage />} />
+                  <Route path="/product/:productId" element={<ProductDetailPage />} />
+                  <Route path="/cart" element={<CartPage />} />
+                  <Route path="/checkout" element={<CheckoutPage />} />
+                  <Route path="/compare" element={<ComparePage />} />
+                  <Route path="/favorites" element={<FavoritesPage />} />
+                  <Route path="/profile" element={<ProfilePage />} />
+                  <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/order-success" element={<OrderSuccessPage />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </FavoritesProvider>
+          </CartProvider>
+        </AuthProvider>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
