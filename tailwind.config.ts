@@ -52,6 +52,20 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+        chronoBlack: '#000000',
+        chronoWhite: '#ffffff',
+        chronoSilver: '#9F9EA1',
+        chronoBlue: {
+          light: '#7CB9E8',
+          DEFAULT: '#0FA0CE',
+          dark: '#0D47A1'
+        },
+        chronoGray: {
+          light: '#F1F1F1',
+          DEFAULT: '#9F9EA1',
+          dark: '#222222'
+        },
+        chronoRed: '#ea384c',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -84,12 +98,60 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+        'fade-in': {
+          '0%': {
+            opacity: '0',
+            transform: 'translateY(10px)'
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateY(0)'
+          }
+        },
+        'fade-out': {
+          '0%': {
+            opacity: '1',
+            transform: 'translateY(0)'
+          },
+          '100%': {
+            opacity: '0',
+            transform: 'translateY(10px)'
+          }
+        },
+        'scale-in': {
+          '0%': {
+            transform: 'scale(0.95)',
+            opacity: '0'
+          },
+          '100%': {
+            transform: 'scale(1)',
+            opacity: '1'
+          }
+        },
+        'float': {
+          '0%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
+          '100%': { transform: 'translateY(0px)' }
+        },
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' }
+        }
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+        'fade-in': 'fade-in 0.5s ease-out',
+        'fade-out': 'fade-out 0.5s ease-out',
+        'scale-in': 'scale-in 0.2s ease-out',
+        'float': 'float 6s ease-in-out infinite',
+        'spin-slow': 'spin-slow 15s linear infinite'
+			},
+      fontFamily: {
+        'sans': ['Inter', 'SF Pro Display', 'Helvetica', 'sans-serif'],
+        'display': ['SF Pro Display', 'Inter', 'Helvetica', 'sans-serif']
+      }
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
