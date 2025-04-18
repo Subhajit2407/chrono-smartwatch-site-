@@ -2,26 +2,22 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const featuredProducts = [
   {
     id: "chrono-ultra",
     name: "Chrono Ultra",
-    tagline: "Our most advanced device ever.",
-    imageUrl: "/lovable-uploads/26c805d6-8899-424b-8f25-55103173740c.png",
+    tagline: "The future on your wrist.",
+    imageUrl: "/lovable-uploads/fa8da755-6be0-44dc-947d-fa4c5316a543.png",
+    color: "bg-gradient-to-r from-red-600 to-blue-700",
   },
   {
     id: "chrono-sport",
     name: "Chrono Sport",
-    tagline: "Engineered for adventure.",
-    imageUrl: "/lovable-uploads/fac1423a-ed6d-4a1b-a9d9-8206e3ee6950.png",
-  },
-  {
-    id: "chrono-se",
-    name: "Chrono SE",
-    tagline: "All the essentials.",
-    imageUrl: "/lovable-uploads/b8fdc549-8692-4a25-89f8-29b7bad2486a.png",
+    tagline: "Performance meets elegance.",
+    imageUrl: "/lovable-uploads/f2a7509d-32e1-49f4-bf43-2195a7c6363c.png",
+    color: "bg-gradient-to-r from-gray-900 to-gray-600",
   },
 ];
 
@@ -37,50 +33,54 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="min-h-screen flex items-center pt-20 pb-12 relative overflow-hidden bg-gradient-to-b from-white to-chronoGray-light">
+    <section className="min-h-[90vh] flex items-center relative overflow-hidden bg-black">
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:3px_3px]" />
+      </div>
+
       <div className="chrono-container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="order-2 lg:order-1">
+          <div className="text-center lg:text-left">
             <motion.div
               key={currentProduct.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="max-w-lg"
+              className="max-w-lg mx-auto lg:mx-0"
             >
-              <span className="inline-block text-chronoBlue font-medium mb-3">
-                Introducing
+              <span className={`inline-block ${currentProduct.color} bg-clip-text text-transparent font-medium mb-3`}>
+                Next Generation
               </span>
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold tracking-tight mb-4">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold tracking-tight mb-4 text-white">
                 {currentProduct.name}
               </h1>
-              <p className="text-2xl sm:text-3xl text-chronoGray-dark font-light mb-8">
+              <p className="text-2xl sm:text-3xl text-gray-300 font-light mb-8">
                 {currentProduct.tagline}
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <Link
                   to={`/product/${currentProduct.id}`}
-                  className="chrono-button-primary flex items-center"
+                  className="chrono-button-primary bg-white text-black hover:bg-gray-100"
                 >
-                  Buy now <ArrowRight size={18} className="ml-2" />
+                  Buy now <ArrowRight size={18} className="ml-2 inline-block" />
                 </Link>
                 <Link
                   to="/shop"
-                  className="chrono-button-secondary"
+                  className="chrono-button-secondary border-white/20 text-white hover:bg-white/10"
                 >
                   Explore all models
                 </Link>
               </div>
 
-              <div className="mt-10 flex space-x-4">
+              <div className="mt-10 flex space-x-4 justify-center lg:justify-start">
                 {featuredProducts.map((product, index) => (
                   <button
                     key={product.id}
                     className={`w-3 h-3 rounded-full transition-all ${
                       index === currentIndex
-                        ? "bg-chronoBlack scale-110"
-                        : "bg-chronoGray"
+                        ? "bg-white scale-110"
+                        : "bg-gray-600"
                     }`}
                     onClick={() => setCurrentIndex(index)}
                     aria-label={`View ${product.name}`}
@@ -90,29 +90,47 @@ const HeroSection = () => {
             </motion.div>
           </div>
 
-          <div className="order-1 lg:order-2 flex justify-center">
+          <div className="relative h-[350px] sm:h-[450px] lg:h-[600px] w-full flex items-center justify-center">
             <motion.div
-              className="relative h-[350px] sm:h-[450px] w-full flex items-center justify-center"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-            >
-              <motion.img
-                key={currentProduct.imageUrl}
-                src={currentProduct.imageUrl}
-                alt={currentProduct.name}
-                className="object-contain h-full max-h-full w-auto"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-              />
-            </motion.div>
+              className="absolute inset-0 bg-gradient-to-br from-transparent to-black/50 rounded-full blur-3xl"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.5, 0.3],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+            />
+            <motion.img
+              key={currentProduct.imageUrl}
+              src={currentProduct.imageUrl}
+              alt={currentProduct.name}
+              className="relative z-10 object-contain h-full w-auto max-w-full"
+              initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+              animate={{ 
+                opacity: 1, 
+                scale: 1,
+                rotate: 0,
+                y: [0, -20, 0]
+              }}
+              transition={{
+                duration: 0.5,
+                y: {
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }
+              }}
+            />
           </div>
         </div>
       </div>
 
       {/* Background Elements */}
-      <div className="absolute top-40 right-[10%] w-40 h-40 rounded-full bg-chronoBlue opacity-10 blur-3xl" />
-      <div className="absolute bottom-40 left-[5%] w-60 h-60 rounded-full bg-chronoGray opacity-10 blur-3xl" />
+      <div className="absolute top-40 right-[10%] w-40 h-40 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 blur-3xl" />
+      <div className="absolute bottom-40 left-[5%] w-60 h-60 rounded-full bg-gradient-to-br from-red-500/20 to-orange-500/20 blur-3xl" />
     </section>
   );
 };
